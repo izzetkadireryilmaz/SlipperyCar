@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarManager : MonoBehaviour
 {
+    int score;
     Vector2 direction;
     public float speed;
     private Rigidbody2D rb;
     public GameObject DeadScene;
     public GameObject Player;
+    public Text ScoreText;
 
     void Start()
     {
@@ -32,15 +35,32 @@ public class CarManager : MonoBehaviour
                 rb.velocity = new Vector2(speed, rb.velocity.y);
             }
         }
+
+        if (score > PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Obstancle")
+        {
+            Destroy(Player);
+            DeadScene.SetActive(true);
+        }
+
         if (collision.gameObject.tag == "Collider")
         {
             Destroy(Player);
             DeadScene.SetActive(true);
         }
 
+        if (collision.gameObject.tag == "Scorer")
+        {
+            score++;
+            ScoreText.text = score.ToString();
+        }
     }
+
 }
