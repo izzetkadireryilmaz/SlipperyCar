@@ -238,8 +238,10 @@ GameObject:
   m_Component:
   - component: {fileID: 151558014}
   - component: {fileID: 151558013}
+  - component: {fileID: 151558016}
+  - component: {fileID: 151558017}
   m_Layer: 0
-  m_Name: MenuManager
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,6 +259,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c760473cb2c5a48ac4f0f76cc29da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 504742871}
+  DeadScene: {fileID: 1391564033}
+  aButton: {fileID: 992711922}
+  award: 0
 --- !u!4 &151558014
 Transform:
   m_ObjectHideFlags: 0
@@ -272,6 +278,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &151558016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151558012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9a7020680069146ab0d20fd72f6e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &151558017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151558012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 166953ec68c3361459ce0c82906a02b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &365428734
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +514,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 151558013}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: PlayButton
+        m_MethodName: TryAgainButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -750,10 +780,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1797549718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 643}
-  m_SizeDelta: {x: 720, y: 210}
+  m_AnchorMin: {x: 0.16900001, y: 0.72687304}
+  m_AnchorMax: {x: 0.83500004, y: 0.8174152}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &631099351
 MonoBehaviour:
@@ -780,7 +810,7 @@ MonoBehaviour:
     m_FontSize: 180
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 1
     m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -885,7 +915,7 @@ GameObject:
   - component: {fileID: 992711925}
   - component: {fileID: 992711924}
   m_Layer: 5
-  m_Name: Quit
+  m_Name: Award
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -954,9 +984,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 151558017}
+        m_TargetAssemblyTypeName: RewardAds, Assembly-CSharp
+        m_MethodName: ShowRewardedAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 151558013}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: QuitButton
+        m_MethodName: AwardButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -986,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 055d5058ff6230d4d88e3044a207f815, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4347fb331af5cd447a2f46fcc7eee36c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1878,7 +1920,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1889,7 +1931,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1797549718
 RectTransform:

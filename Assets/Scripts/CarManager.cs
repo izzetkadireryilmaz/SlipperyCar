@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class CarManager : MonoBehaviour
@@ -46,14 +47,16 @@ public class CarManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Obstancle")
         {
-            Destroy(Player);
             DeadScene.SetActive(true);
+            Player.transform.position = new Vector3(0, -3.7f, 0);
+            Player.SetActive(false);
         }
 
         if (collision.gameObject.tag == "Collider")
         {
-            Destroy(Player);
             DeadScene.SetActive(true);
+            Player.transform.position = new Vector3 (0,-3.7f, 0);
+            Player.SetActive(false);
         }
 
         if (collision.gameObject.tag == "Scorer")
